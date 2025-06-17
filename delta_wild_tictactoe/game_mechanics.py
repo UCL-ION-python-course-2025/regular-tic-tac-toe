@@ -264,9 +264,6 @@ class WildTictactoeEnv:
         time.sleep(1 / self.game_speed_multiplier)
 
 
-######## Do not worry about anything below here ###################
-
-
 WIDTH = 600
 HEIGHT = 600
 LINE_WIDTH = 15
