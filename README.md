@@ -1,4 +1,4 @@
-# RL for Wild Tic-Tac-Toe :o::x::x::x::o:
+# Wild Tic-Tac-Toe :o::x::x::x::o:
 
 Wild Tic-Tac-Toe is a twist on the classic game of Tic-Tac-Toe.
 
@@ -22,7 +22,25 @@ Think about why it may be wise to play an `O` here!
 
 Your task is to write code that plays **Wild Tic-Tac-Toe**.
 
-# Competition Rules :scroll:
+## Human player
+
+You will be playing against your own bot in this game! Click on the board to take a move. Left click to place an `O`. Right click to place an `X`.
+
+If you cannot see the board when you click run, click the "+" button next to the Console. Then open "VNC". You should see the board in this tab.
+
+If you'd rather your bot played against a random opponent without the visuals, change the bottom line of main.py to this:
+
+```python
+play_wild_ttt_game(
+     your_choose_move=choose_move,
+     opponent_choose_move=choose_move_randomly,
+     game_speed_multiplier=1,
+     verbose=True,
+     render=False,
+ )
+```
+
+## Competition Rules :scroll:
 
 -   You can only write code in the `choose_move` function in `main.py`.
    - In the competition, your agent will call the `choose_move()` function in `main.py` to select a move
@@ -57,9 +75,7 @@ O |   | X
   |   | X
 ```
 
-### Human player
 
-You will be playing against your own bot in this game! Click on the board to take a move. Left click to place an `O`. Right click to place an `X`.
 
 ### Example in your `choose_move` function
 
