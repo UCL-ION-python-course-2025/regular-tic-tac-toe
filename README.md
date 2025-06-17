@@ -33,7 +33,7 @@ Your task is to write code that plays **Wild Tic-Tac-Toe**.
 
 ### New concepts
 
-There are a few new python concepts you will need for this excerise (and to understand the example in `choose_move()`). These are detailed in `python_concepts.md`
+There are a few new python concepts you will need for this exercise (and to understand the example in `choose_move()`). These are detailed in `python_concepts.md`
 
 ### The **`choose_move()`** Function
 
