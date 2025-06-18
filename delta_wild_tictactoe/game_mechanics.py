@@ -25,14 +25,12 @@ def reward_function(board: List[str]) -> int:
     return int(is_winner(board))
 
 
-def choose_move_randomly(board: List[str]) -> Tuple[int, str]:
+def choose_move_randomly(board: List[str]) -> int:
     """This function takes a random move.
 
     It is an excellent first opponent to set as opponent_choose_move
     """
-    position: int = random.choice([count for count, item in enumerate(board) if item == Cell.EMPTY])
-    counter: str = random.choice([Cell.O, Cell.X])
-    return position, counter
+    return random.choice([count for count, item in enumerate(board) if item == 0])
 
 
 def place_counter(board: List[str], position: int, counter: str) -> List[str]:
@@ -47,7 +45,7 @@ def place_counter(board: List[str], position: int, counter: str) -> List[str]:
     return board
 
 
-def play_wild_ttt_game(
+def play_ttt_game(
     your_choose_move: Callable[[List[str]], Tuple[int, str]],
     opponent_choose_move: Callable[[List[str]], Tuple[int, str]],
     game_speed_multiplier: float = 1.0,
@@ -75,7 +73,7 @@ def play_wild_ttt_game(
     state, reward, done, info = game.reset()
     while not done:
 
-        action = your_choose_move(state)
+        action = your_choose_move(convert_board_to_regular_ttt(state))
         state, reward, done, info = game.step(action)
 
 
@@ -145,10 +143,10 @@ def get_empty_board() -> List[str]:
     return [Cell.EMPTY] * 9
 
 
-def check_action_valid(action: Tuple[int, str], board: List[str]):
+def check_action_valid(action: Tuple[int, str], board: List[str]) -> None:
 
     assert isinstance(action, tuple), "Action must be a tuple of (position, counter)"
-    assert isinstance(action[0], int), "Action[0] must be an integer"
+    assert isinstance(action[0], int), f"Action[0] must be an integer, got {action[0]}"
     assert isinstance(action[1], str), "Action[1] must be a string"
 
     position, counter = action
@@ -186,13 +184,16 @@ class WildTictactoeEnv:
             Player.player if self.player_move == Player.opponent else Player.opponent
         )
 
-    def step(self, action: Tuple[int, str]) -> Tuple[List[str], int, bool, Dict]:
+    def step(self, action: int) -> Tuple[List[str], int, bool, Dict]:
         """Called by user - takes 2 turns, yours and your opponent's"""
 
-        reward = self._step(action)
+        reward = self._step((action, Cell.X))
 
         if not self.done:
-            opponent_action = self.opponent_choose_move(self.board)
+            opponent_action = self.opponent_choose_move(
+                flip_board(convert_board_to_regular_ttt(self.board))
+            )
+            opponent_action = (opponent_action, Cell.O)
             opponent_reward = self._step(opponent_action)
             # Negative sign is because the opponent's victory is your loss
             reward -= opponent_reward
@@ -250,7 +251,11 @@ class WildTictactoeEnv:
             self.render_game()
 
         if self.player_move == Player.opponent:
-            opponent_action = self.opponent_choose_move(self.board)
+            opponent_action = self.opponent_choose_move(
+                flip_board(convert_board_to_regular_ttt(self.board))
+            )
+            opponent_action = (opponent_action, Cell.O)
+
             reward = -self._step(opponent_action)
             if self.render:
                 self.render_game()
@@ -472,10 +477,8 @@ def human_player(state) -> Tuple[int, str]:
                 coord = pos_to_coord(pos)
                 square = coord_to_action(coord)
 
-                if event.button == RIGHT:
-                    return (square, Cell.X)
-                if event.button == LEFT:
-                    return (square, Cell.O)
+                if event.button == RIGHT or event.button == LEFT:
+                    return square
 
 
 def save_dictionary(my_dict: Dict, team_name: str) -> None:
@@ -501,3 +504,21 @@ def load_dictionary(team_name: str, umbrella: Path = HERE) -> Dict:
     dict_path = os.path.join(umbrella, f"dict_{team_name}.pkl")
     with open(dict_path, "rb") as f:
         return pickle.load(f)
+
+
+def convert_board_to_regular_ttt(board: List[str]) -> List[int]:
+    new_board: List[int] = [0 for _ in range(9)]
+    for idx, counter in enumerate(board):
+        if counter == " ":
+            new_board[idx] = 0
+        elif counter == "X":
+            new_board[idx] = 1
+        elif counter == "O":
+            new_board[idx] = -1
+        else:
+            raise ValueError(f"Counter {counter} not understood")
+    return new_board
+
+
+def flip_board(board: List[int]) -> List[int]:
+    return [counter * -1 for counter in board]

@@ -2,7 +2,7 @@ import random
 
 from game_mechanics import (
     human_player,
-    play_wild_ttt_game,
+    play_ttt_game,
 )
 
 TEAM_NAME = "Team Name"  # <---- Enter your team name here!
@@ -17,15 +17,12 @@ def choose_move(board):
 
     Input:
         board: list representing the board.
-                (see README Technical Details for more info)
-
+               (see README Technical Details for more info)
 
     Returns:
         position (int): The position to place your piece
                         (an integer 0 -> 8), where 0 is
                         top left and 8 is bottom right.
-        counter (str): The counter to place. "X" or "O".
-
     """
 
     # We provide an example here that chooses a random position on the board and
@@ -35,7 +32,7 @@ def choose_move(board):
     # for idx in range(9):
     #     if board[idx] == " ":
     #         empty_positions.append(idx)
-    # return random.choice(empty_positions), random.choice(["X", "O"])
+    # return random.choice(empty_positions)
 
     raise NotImplementedError("You need to implement this function!")
 
@@ -43,7 +40,7 @@ def choose_move(board):
 if __name__ == "__main__":
 
     # Play against your bot!!
-    play_wild_ttt_game(
+    play_ttt_game(
         your_choose_move=human_player,
         opponent_choose_move=choose_move,
         game_speed_multiplier=10,

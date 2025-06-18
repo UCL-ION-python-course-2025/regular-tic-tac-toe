@@ -1,30 +1,21 @@
-# Wild Tic-Tac-Toe :o::x::x::x::o:
+# Tic-Tac-Toe :o::x::x::x::o:
 
-Wild Tic-Tac-Toe is a twist on the classic game of Tic-Tac-Toe.
+Tic-tac-toe (also known as noughts and crosses) is a classic open and paper game.
 
-![Wild Tic-Tac-Toe. Player 1 = blue. Player 2 = red](images/wildttt.jpeg)
+![Wild Tic-Tac-Toe. Player 1 = blue. Player 2 = red](images/ttt.png)
 
-## Rules of Wild Tic-Tac-Toe :o:
+## Rules of Tic-Tac-Toe :o:
 
-Like normal Tic-Tac-Toe, both players attempt to play 3 of the same counter (`O` or `X`) in a row on a **3 x 3** grid.
+Both players attempt to play 3 of the their counter (`O` or `X`) in a row on a **3 x 3** grid, either vertically, horizontally or diagonally.
 
-**The twist is that both players can choose to play an `O` or a `X`** on any move. The winner is whoever plays the **3rd `X` or `O` in a line** (horizontally, vertically or diagonally) of `X`'s or `O`'s.
 
-![Wild Tic-Tac-Toe win. Blue has won here (since blue played last & completed the line of 3)](images/wild_ttt_win.jpeg)
+Your task is to write code that plays **Tic-Tac-Toe**.
 
-In the image above, you can see a win for blue (player 1) resulting from 3 `X`'s, 2 of which were played by blue and 1 by red (player 2). Player 1 goes first, so has placed the winning counter here.
-
-![Wild Tic-Tac-Toe game in progress. Red to play next.](images/wild_ttt_ongoing.jpeg)
-
-In this image, you can see an ongoing game. You are player 2, playing the red counters. There are `12` possible moves you could make, since you can place an `X` or an `O` on any empty space.
-
-Think about why it may be wise to play an `O` here!
-
-Your task is to write code that plays **Wild Tic-Tac-Toe**.
+You can play against google [here](https://g.co/kgs/5kTaipx)
 
 ## Human player
 
-You will be playing against your own bot in this game! Click on the board to take a move. Left click to place an `O`. Right click to place an `X`.
+You will be playing against your own bot in this game! Just click on the board to take a move.
 
 If you cannot see the board when you click run, click the "+" button next to the Console. Then open "VNC". You should see the board in this tab.
 
@@ -59,7 +50,7 @@ In the competition, the **`choose_move()`** function is called to make your next
 
 **Inputs:**
 
-1. The board - a flat list of strings `" "` for empty, `"X"` or `"O"`, where the grid below shows how the list index corresponds to locations on the board. E.g. top left corner is the first element of the list.
+1. The board - a flat list of numbers (0, 1 or -1). 1 is your counters, -1 is your opponents, 0 is empty. The grid below shows how the list index corresponds to locations on the board. E.g. top left corner is the first element of the list.
 
 ```
 0 | 1 | 2
@@ -67,13 +58,15 @@ In the competition, the **`choose_move()`** function is called to make your next
 6 | 7 | 8
 ```
 
-E.g. `["O", " ", " ", "O", " ", "X", " ", " ", "X"]` represents:
+E.g. `[1, 0, 0, 1, 0, -1, 0, 0, -1]` represents:
 
 ```
 O |   |
 O |   | X
   |   | X
 ```
+
+Do not worry about whether your are O or X. Just focus on the 1s and -1s.
 
 
 

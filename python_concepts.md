@@ -1,36 +1,13 @@
-# Strings, list operations, Multiple Return Values and random
+# Helpful python concepts
 
 This document contains potentially useful information for this game.
 
-- Working with **strings**
 - Indexing lists
 - Using **`.append()`** to modify lists
-- Returning **multiple values** from a function
 - Working with random.choice
 
 ---
 
-## 🔤 Strings in Python
-
-Strings are used to store text. You can create a string using single or double quotes:
-
-```python
-name = 'Alice'
-greeting = "Hello, world!"
-```
-You can check a string's value in the same way as numbers
-```python
-name == "steve"
-
-if name == "steve":
-    print('Hi Steve!')
-```
-Outputs:
-```
-Hi Steve!
-```
-
----
 
 ## 📚 Lists and `.append()`
 
@@ -92,30 +69,8 @@ print(len(fruits))  # 3
 
 This helps you avoid index errors when looping or slicing.
 
-
 ---
 
-## 🔁 Multiple Return Values
-
-Functions in Python can return more than one value using a tuple (a group of values separated by commas).
-
-```python
-def get_name_and_age():
-    name = "Alice"
-    age = 30
-    return name, age
-```
-
-### Unpacking Multiple Values
-
-You can capture each returned value in separate variables:
-
-```python
-person_name, person_age = get_name_and_age()
-
-print(person_name)  # 'Alice'
-print(person_age)   # 30
-```
 
 ## 🎲 `random.choice`
 
