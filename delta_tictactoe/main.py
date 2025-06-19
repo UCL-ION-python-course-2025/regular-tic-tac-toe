@@ -30,7 +30,7 @@ def choose_move(board):
     # See python_concepts.md if you don't understand this.
     # empty_positions = []
     # for idx in range(9):
-    #     if board[idx] == " ":
+    #     if board[idx] == 0:
     #         empty_positions.append(idx)
     # return random.choice(empty_positions)
 

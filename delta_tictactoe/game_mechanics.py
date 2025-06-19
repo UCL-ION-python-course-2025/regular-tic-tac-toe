@@ -17,7 +17,7 @@ HERE = Path(__file__).parent.resolve()
 
 
 def reward_function(board: List[str]) -> int:
-    """This function returns the reward that wo be given to the player who played the most recent
+    """This function returns the reward that will be given to the player who played the most recent
     move on 'board'.
 
     Returns either 0 or 1
@@ -465,9 +465,7 @@ RIGHT = 3
 
 
 def human_player(state) -> Tuple[int, str]:
-    print(
-        "Your move, click to place a tile!\nLeft click to place an `O`.\nRight click to place an `X`."
-    )
+    print("Your move, click to place a tile!")
 
     while True:
         ev = pygame.event.get()
